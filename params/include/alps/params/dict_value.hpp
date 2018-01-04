@@ -157,7 +157,7 @@ namespace alps {
 
         /// Print the value together with type in some human-readable format
         inline std::ostream& operator<<(std::ostream& os, const dict_value& dv) {
-            return print(os, dv, false);
+            return print(os, dv, true);
         }
         
     } // params_ns::

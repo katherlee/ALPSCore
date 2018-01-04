@@ -385,27 +385,15 @@ namespace alps {
 
         std::ostream& operator<<(std::ostream& s, const params& p) {
             s << "[alps::params]"
-              << " origins=" << p.origins_.data() << " status=" << p.err_status_
-              << "\nRaw kv:\n";
-            BOOST_FOREACH(const params::strmap::value_type& kv, p.raw_kv_content_) {
-                s << kv.first << "=" << kv.second << "\n";
-            }
-            s << "[alps::params] Dictionary:\n";
+              << " origins=" << p.origins_.data() << " status=" << p.err_status_ << "\n"
+              << "[alps::params] Dictionary:\n";
             for (params::const_iterator it=p.begin(); it!=p.end(); ++it) {
                 const std::string& key=it->first;
                 const dict_value& val=it->second;
-                s << key << " = " << val;
-                params::td_map_type::const_iterator tdit = p.td_map_.find(key);
-                if (tdit!=p.td_map_.end()) {
-                    s << " descr='" << tdit->second.descr()
-                      << "' typestring='" << tdit->second.typestr() << "'"
-                      << "' defnum=" << tdit->second.defnumber();
-                }
-                s << std::endl;
+                s << key << " = " << val << "\n";
             }
             return s;
         }
-
 
 #ifdef ALPS_HAVE_MPI
         void params::broadcast(const alps::mpi::communicator& comm, int rank) {
